@@ -15,10 +15,10 @@
             <a class="score">View high scores</a>
             <b class="timer" id="countdown"></b>
         </header>
-            <div class="subject">
-                <h1>Coding Quiz Challenge</h1>
-            </div>
-        <div class="card">
+        <div class="subject">
+            <h1>Coding Quiz Challenge</h1>
+        </div>
+        <section class="welcome card">
             <div class="card-header">
                 <h2>Try to anser the following code-related questions within the time limit. Keep in mind that incorrect
                     answers will penalize your score/time by ten seconds!</h2>
@@ -26,17 +26,30 @@
             <div class="card-footer">
                 <button id="start" class="btn">Start Quiz</button>
             </div>
-        </div>
+        </section>
+        <!--Question and Answers section when click-->
+        <section class="quiz hidden">
+            <div>
+                <h2 class="question" id="showQ"></h2>
+                <ul class="answerDisplay">
+                    <li id="answer1"></li>
+                    <li id="answer2"></li>
+                    <li id="answer3"></li>
+                    <li id="answer4"></li>
+                </ul>
+            </div>
+        </section>
+        <!--Question and Answers section when click-->
+        <section class="highScore hidden">
+            <div>
+                <h2 class="quest">High Scores</h2>
+                <ul class="QDisplay" id="Show">
+
+                </ul>
+            </div>
+        </section>
     </div>
-    <!--Question and Answers section when click-->
-    <section class="container">
-        <div>
-            <h2>
 
-            </h2>
-        </div>
-
-    </section>
     <script src="./Assets/script.js"></script>
 </body>
 
