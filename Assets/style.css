@@ -83,6 +83,21 @@ body {
 .answerDisplay{
   list-style-type: none;
 }
+.ansBtn{
+background-color: rgb(46, 46, 141);
+border-radius: 5px;
+color:hsl(0, 0%, 100%);
+font-size: 12px;
+box-shadow: rgba(0, 0, 0, 0.1)0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px;
+line-height: 12px;
+margin: 2px 8px 2px 12px;
+padding: 7px 16px;
+text-align: left;
+width: 175px;
+}
+.ansBtn:hover{
+  background-color: rgb(204, 64, 204);
+}
 
 button[] {
   cursor: default;

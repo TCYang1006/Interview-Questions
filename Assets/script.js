@@ -72,14 +72,10 @@ function showQuestion() {
 
     //get next question object from question array using question index
     if (questionIndex<questionArray.length){
+        //shows questions
         showQEl.textContent = questionArray[questionIndex].q;
-        console.log(showQEl.textContent)
-    }
-    //TODO:  declare local variable question called question and assign 'q' value of the question object to it
-    var question;
-    question = questionArray[questionIndex].q;
-    //using a for loop go through the 'a' array and then assign the element of the array to the list of answer using the 'id'
-    for (let i = 0; i < questionArray.length; i++) {
+        console.log(showQEl.textContent);
+        //shows answer
         answer1El.textContent = questionArray[questionIndex].ansr[0];
         console.log(answer1El.textContent);
         answer2El.textContent = questionArray[questionIndex].ansr[1];
@@ -89,8 +85,24 @@ function showQuestion() {
         answer4El.textContent = questionArray[questionIndex].ansr[3];
         console.log(answer4El.textContent);
     }
+    //TODO:  declare local variable question called question and assign 'q' value of the question object to it
+    var question;
+    question = questionArray[questionIndex].q;
+    console.log(question);
+    //using a for loop go through the 'a' array and then assign the element of the array to the list of answer using the 'id'
+    /*for (let i = 0; i < questionArray.length; i++) {
+        answer1El.textContent = questionArray[questionIndex].ansr[0];
+        console.log(answer1El.textContent);
+        answer2El.textContent = questionArray[questionIndex].ansr[1];
+        console.log(answer2El.textContent);
+        answer3El.textContent = questionArray[questionIndex].ansr[2];
+        console.log(answer3El.textContent);
+        answer4El.textContent = questionArray[questionIndex].ansr[3];
+        console.log(answer4El.textContent);
+    }*/
 
     //TODO:  for each list item assign an click event listner that checks for the correct answer (call checkAnsers)
+    checkAnswers();
     //add one to the question index
     questionIndex ++;
 
