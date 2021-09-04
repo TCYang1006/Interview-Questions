@@ -15,23 +15,25 @@
             <a class="score">View high scores</a>
             <b class="timer" id="countdown"></b>
         </header>
-        <div class="subject">
+        <section class="welcome subject">
             <h1>Coding Quiz Challenge</h1>
-        </div>
-        <section class="welcome card">
-            <div class="card-header">
-                <h2>Try to anser the following code-related questions within the time limit. Keep in mind that incorrect
-                    answers will penalize your score/time by ten seconds!</h2>
-            </div>
-            <div class="card-footer">
-                <button id="start" class="btn">Start Quiz</button>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Try to anser the following code-related questions within the time limit. Keep in mind that
+                        incorrect
+                        answers will penalize your score/time by ten seconds!</h2>
+                </div>
+                <div class="card-footer">
+                    <button id="start" class="btn">Start Quiz</button>
+                </div>
+
             </div>
         </section>
         <!--Question and Answers section when click-->
         <section class="quiz hidden">
             <div>
-                <h2 class="question" id="showQ"></h2>
                 <ul class="answerDisplay">
+                    <h2 class="question" id="showQ"></h2>
                     <li><button id="answer1" class="ansBtn">Option1</button></li>
                     <li><button id="answer2" class="ansBtn">Option1</button></li>
                     <li><button id="answer3" class="ansBtn">Option1</button></li>
