@@ -26,7 +26,7 @@ var startBtn = document.querySelector('#start'),
             "3.  alerts",
             "4.  numbers"
         ],
-        ca: "2"
+        ca: "booleans"
     }, {
         q: "The condition in an if/else statement is enclosed with a __________.",
         ansr: [
@@ -35,7 +35,7 @@ var startBtn = document.querySelector('#start'),
             "3.  parenthesis",
             "4.  square brackets"
         ],
-        ca: "3"
+        ca: "parenthesis"
     }, {
         q: "String values must be enclosed within _________ when being assigned to variables.",
         ansr: [
@@ -44,7 +44,7 @@ var startBtn = document.querySelector('#start'),
             "3.  quotes",
             "4.  paranthesis"
         ],
-        ca: "2"
+        ca: "curly brackets"
     }];
 
 //timer count down from 75 secs (shown in example - currently set to 5 secs)****NEED TO CHANGE TO 75 BEFORE SUBMITTING
@@ -107,10 +107,10 @@ function showQuestion() {
     }*/
 
     //TODO:  for each list item assign an click event listner that checks for the correct answer (call checkAnswers)
-    answer1El.onclick = checkAnswers(0);
-    answer2El.onclick = checkAnswers(1);
-    answer3El.onclick = checkAnswers(2);
-    answer4El.onclick = checkAnswers(3);
+    answer1El.addEventListener('click', recordingClick);
+    answer2El.addEventListener('click', recordingClick);
+    answer3El.addEventListener('click', recordingClick);
+    answer4El.addEventListener('click', recordingClick);
 
     //add one to the question index
     questionIndex++;
@@ -119,16 +119,29 @@ function showQuestion() {
 
 
 
-function checkAnswers(event) {
-    //get refrence to list items using event.target
-    console.log(event);
-    //get the data set attribute value for correct answer
-    var correctAnswer;
-    correctAnswer = questionArray[questionIndex].ca;
-    console.log(correctAnswer);
-    //TODO:  if value is not true (answer is incorrect) then minus 10 from timeLeft
-
+function recordingClick(event) {
+    if (event.target.matches("button")) {
+        var uAnswer = event.target.textContent.substring(1);
+        console.log(uAnswer);
+        if (questionIndex === questionArray.length - 1) {
+            checkAnswer(uAnswer);
+            //break;
+        } else {
+            checkAnswer(uAnswer);
+            questionIndex++;
+        }
+    }
 }
+
+function checkAnswer(uAnswer){
+    if(uAnswer === questionArray[questionIndex].ca){
+        console.log(questionArray[questionIndex].ca);
+    }else{
+        //show result
+        //subtract 10 seconds from timeLeft
+    }
+}
+
 
 function savingInitials() {
 
@@ -159,7 +172,7 @@ function startHighScore() {
 
 }
 
-function startWelcome(){
+function startWelcome() {
     //display welcome section
     welcomeSection.classList.remove('hidden');
     //hide high score section
