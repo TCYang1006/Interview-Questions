@@ -12,7 +12,9 @@
 <body>
     <div class="wrapper">
         <header>
-            <a class="score">View high scores</a>
+            <a class="score">
+                <button1 id="high" class="highButton">View high scores</button1>
+            </a>
             <b class="timer" id="countdown"></b>
         </header>
         <section class="welcome subject">
@@ -34,20 +36,30 @@
             <div>
                 <ul class="answerDisplay">
                     <h2 class="question" id="showQ"></h2>
-                    <li><button id="answer1" class="ansBtn">Option1</button></li>
-                    <li><button id="answer2" class="ansBtn">Option1</button></li>
-                    <li><button id="answer3" class="ansBtn">Option1</button></li>
-                    <li><button id="answer4" class="ansBtn">Option1</button></li>
+                    <div id="userAnswer">
+                        <li><button id="answer1" value=0 type="button" class="ansBtn">Option1</button></li>
+                        <li><button id="answer2" value="1" type="button" class="ansBtn">Option2</button></li>
+                        <li><button id="answer3" value="2" type="button" class="ansBtn">Option3</button></li>
+                        <li><button id="answer4" value="3" type="button" class="ansBtn">Option4</button></li>
+                    </div>
+                    <div class="wrongOrCorrect" id="WgOrCorr">Wrong or Correct
+                    </div>
                 </ul>
             </div>
         </section>
         <!--Question and Answers section when click-->
         <section class="highScore hidden">
             <div>
-                <h2 class="quest">High Scores</h2>
+                <h2 class="champ">High Scores</h2>
                 <ul class="QDisplay" id="Show">
-
                 </ul>
+                <div class="header">
+                    <a class="gb"><button class="ansBtn1" id="go">Go back</button>
+                    </a>
+                    <b class="gb">
+                        <button class="ansBtn2">Clear high scores</button>
+                    </b>
+                </div>
             </div>
         </section>
     </div>

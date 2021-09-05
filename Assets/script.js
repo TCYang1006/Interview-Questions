@@ -1,4 +1,6 @@
 var startBtn = document.querySelector('#start'),
+    highBtn = document.querySelector('#high'),
+    gbBtn = document.querySelector('#go'),
     timerEl = document.querySelector('#countdown'),
     welcomeSection = document.querySelector('.welcome'),
     quizSection = document.querySelector('.quiz'),
@@ -8,6 +10,9 @@ var startBtn = document.querySelector('#start'),
     answer3El = document.querySelector('#answer3'),
     answer4El = document.querySelector('#answer4'),
     highScoreSection = document.querySelector('.highScore'),
+    ansBtn = document.querySelectorAll('button.ansBtn'),
+    item = document.getElementById("userAnswer"),
+    uAnswer,
     answersArray = [],
     score,
     timeLeft,
@@ -71,7 +76,7 @@ function showQuestion() {
 
 
     //get next question object from question array using question index
-    if (questionIndex<questionArray.length){
+    if (questionIndex < questionArray.length) {
         //shows questions
         showQEl.textContent = questionArray[questionIndex].q;
         console.log(showQEl.textContent);
@@ -101,17 +106,28 @@ function showQuestion() {
         console.log(answer4El.textContent);
     }*/
 
-    //TODO:  for each list item assign an click event listner that checks for the correct answer (call checkAnsers)
-    checkAnswers();
+    //TODO:  for each list item assign an click event listner that checks for the correct answer (call checkAnswers)
+    answer1El.onclick = checkAnswers(0);
+    answer2El.onclick = checkAnswers(1);
+    answer3El.onclick = checkAnswers(2);
+    answer4El.onclick = checkAnswers(3);
+
     //add one to the question index
-    questionIndex ++;
+    questionIndex++;
 
 }
 
+
+
 function checkAnswers(event) {
-    //TODO: get refrence to list items using event.target
-    //TODO: get the data set attribute value for correct answer
-    //if value is not true (answer is incorrect) then minus 10 from timeLeft
+    //get refrence to list items using event.target
+    console.log(event);
+    //get the data set attribute value for correct answer
+    var correctAnswer;
+    correctAnswer = questionArray[questionIndex].ca;
+    console.log(correctAnswer);
+    //TODO:  if value is not true (answer is incorrect) then minus 10 from timeLeft
+
 }
 
 function savingInitials() {
@@ -135,5 +151,21 @@ function startQuiz() {
     showQuestion();
 }
 
+function startHighScore() {
+    //hide welcome section
+    welcomeSection.classList.add('hidden');
+    //display high score section
+    highScoreSection.classList.remove('hidden');
+
+}
+
+function startWelcome(){
+    //display welcome section
+    welcomeSection.classList.remove('hidden');
+    //hide high score section
+    highScoreSection.classList.add('hidden');
+}
 
 startBtn.addEventListener('click', startQuiz);
+highBtn.addEventListener('click', startHighScore);
+gbBtn.addEventListener('click', startWelcome);

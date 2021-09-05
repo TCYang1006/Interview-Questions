@@ -31,6 +31,10 @@ body {
     margin: 0;
     display: inline;
 }
+.score:hover{
+  cursor: pointer;
+}
+
 .timer{
     float: right;
     font-style: normal;
@@ -110,6 +114,16 @@ width: 175px;
   cursor: pointer;
 }
 
+.wrongOrCorrect{
+  color: gainsboro;
+  margin: 10px;
+  border-top: gainsboro 3px solid;
+  text-align: left;
+  font-style:italic;
+  font-size: 24px;
+  padding: 10px;
+}
+
 button[] {
   cursor: default;
   background: #c0c7cf;
@@ -118,6 +132,51 @@ button[] {
 .hidden{
   display:none;
 }
+.highScore{
+  background-color: #f9fbfd;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 30px 40px;
+  text-align: center;
+  font-style: normal;
+}
+
+.gb{
+  margin: 0;
+  display: inline;
+}
+.ansBtn1{
+  background-color: rgb(46, 46, 141);
+  border-radius: 5px;
+  color:hsl(0, 0%, 100%);
+  font-size: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1)0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px;
+  line-height: 12px;
+  margin: 2px 2px 2px 12px;
+  padding: 7px 16px;
+  text-align: center;
+  width: 85px;
+  }
+  .ansBtn1:hover{
+    background-color: rgb(204, 64, 204);
+    cursor: pointer;
+  }
+  .ansBtn2{
+    background-color: rgb(46, 46, 141);
+    border-radius: 5px;
+    color:hsl(0, 0%, 100%);
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1)0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px 0px;
+    line-height: 12px;
+    margin: 2px 8px 2px 2px;
+    padding: 7px 16px;
+    text-align: center;
+    width: 130px;
+    }
+    .ansBtn2:hover{
+      background-color: rgb(204, 64, 204);
+      cursor: pointer;
+    }
 
 
 @media (max-width: 690px) {
