@@ -9,6 +9,7 @@ var startBtn = document.querySelector('#start'),
     answer2El = document.querySelector('#answer2'),
     answer3El = document.querySelector('#answer3'),
     answer4El = document.querySelector('#answer4'),
+    wgOrCorrEl = document.querySelector('#wgOrCorr'),
     highScoreSection = document.querySelector('.highScore'),
     ansBtn = document.querySelectorAll('button.ansBtn'),
     item = document.getElementById("userAnswer"),
@@ -26,7 +27,7 @@ var startBtn = document.querySelector('#start'),
             "3.  alerts",
             "4.  numbers"
         ],
-        ca: "booleans"
+        ca: "3.  alerts"
     }, {
         q: "The condition in an if/else statement is enclosed with a __________.",
         ansr: [
@@ -35,7 +36,7 @@ var startBtn = document.querySelector('#start'),
             "3.  parenthesis",
             "4.  square brackets"
         ],
-        ca: "parenthesis"
+        ca: "3.  parenthesis"
     }, {
         q: "String values must be enclosed within _________ when being assigned to variables.",
         ansr: [
@@ -44,12 +45,30 @@ var startBtn = document.querySelector('#start'),
             "3.  quotes",
             "4.  paranthesis"
         ],
-        ca: "curly brackets"
+        ca: "3.  quotes"
+    }, {
+        q: "Arrays in JavaScript can be used to store _________.",
+        ansr: [
+            "1.  numbers and string",
+            "2.  other arrays",
+            "3.  booleans",
+            "4.  all of the above"
+        ],
+        ca: "4.  all of the above"
+    }, {
+        q: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        ansr: [
+            "1.  JavaScript",
+            "2.  terminal/bash",
+            "3.  for loops",
+            "4.  console.log"
+        ],
+        ca: "4.  console.log"
     }];
 
 //timer count down from 75 secs (shown in example - currently set to 5 secs)****NEED TO CHANGE TO 75 BEFORE SUBMITTING
 function countdown() {
-    timeLeft = 5;
+    timeLeft = 20;
 
     var timeIntervalID = setInterval(function () {
         if (timeLeft > 1) {
@@ -90,10 +109,10 @@ function showQuestion() {
         answer4El.textContent = questionArray[questionIndex].ansr[3];
         console.log(answer4El.textContent);
     }
-    //TODO:  declare local variable question called question and assign 'q' value of the question object to it
-    var question;
-    question = questionArray[questionIndex].q;
-    console.log(question);
+    //declare local variable question called question and assign 'q' value of the question object to it
+    // var question;
+    // question = questionArray[questionIndex].q;
+    // console.log(question);
     //using a for loop go through the 'a' array and then assign the element of the array to the list of answer using the 'id'
     /*for (let i = 0; i < questionArray.length; i++) {
         answer1El.textContent = questionArray[questionIndex].ansr[0];
@@ -113,7 +132,7 @@ function showQuestion() {
     answer4El.addEventListener('click', recordingClick);
 
     //add one to the question index
-    questionIndex++;
+    //questionIndex++;
 
 }
 
@@ -121,27 +140,38 @@ function showQuestion() {
 
 function recordingClick(event) {
     if (event.target.matches("button")) {
-        var uAnswer = event.target.textContent.substring(1);
-        console.log(uAnswer);
+        uAnswer = event.target.textContent;
         if (questionIndex === questionArray.length - 1) {
             checkAnswer(uAnswer);
-            //break;
+            //end quiz
         } else {
             checkAnswer(uAnswer);
-            questionIndex++;
         }
     }
 }
 
-function checkAnswer(uAnswer){
-    if(uAnswer === questionArray[questionIndex].ca){
-        console.log(questionArray[questionIndex].ca);
-    }else{
-        //show result
-        //subtract 10 seconds from timeLeft
+function checkAnswer(uAnswer) {
+    if (uAnswer === questionArray[questionIndex].ca) {
+        result = true;
+        showResults(result);
+    } else {
+        result = false;
+        timeLeft = timeLeft - 10;
+        showResults(result);
     }
 }
 
+function showResults(result) {
+    if (result === true) {
+        wgOrCorrEl.textContent = "Correct";
+        questionIndex++;
+        showQuestion();
+    } else {
+        wgOrCorrEl.textContent = "Wrong";
+        questionIndex++;
+        showQuestion();
+    }
+}
 
 function savingInitials() {
 
