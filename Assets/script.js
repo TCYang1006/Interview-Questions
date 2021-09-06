@@ -66,21 +66,18 @@ var startBtn = document.querySelector('#start'),
         ca: "4.  console.log"
     }];
 
-//timer count down from 75 secs (shown in example - currently set to 5 secs)****NEED TO CHANGE TO 75 BEFORE SUBMITTING
 function countdown() {
-    timeLeft = 20;
 
     var timeIntervalID = setInterval(function () {
-        if (timeLeft > 1) {
-            timerEl.textContent = "Timer: " + timeLeft;
-            timeLeft--;
-        } else if (timeLeft === 1) {
+        if (timeLeft > 0) {
             timerEl.textContent = "Timer: " + timeLeft;
             timeLeft--;
         } else {
             //timer reaches zero sec Need to calculate scores
             timerEl.textContent = "Timer: " + timeLeft;
+            savingInitials()
             clearInterval(timeIntervalID);
+            
         }
     }, 1000);
 }
@@ -139,15 +136,10 @@ function showQuestion() {
 
 
 function recordingClick(event) {
-    if (event.target.matches("button")) {
-        uAnswer = event.target.textContent;
-        if (questionIndex === questionArray.length - 1) {
-            checkAnswer(uAnswer);
-            //end quiz
-        } else {
-            checkAnswer(uAnswer);
-        }
-    }
+    event.target.matches("button");
+    uAnswer = event.target.textContent;
+    checkAnswer(uAnswer);
+
 }
 
 function checkAnswer(uAnswer) {
@@ -164,24 +156,36 @@ function checkAnswer(uAnswer) {
 function showResults(result) {
     if (result === true) {
         wgOrCorrEl.textContent = "Correct";
-        questionIndex++;
-        showQuestion();
+        if (questionIndex === questionArray.length - 1) {
+            savingInitials()
+        } else {
+            questionIndex++;
+            showQuestion();
+        }
+
     } else {
         wgOrCorrEl.textContent = "Wrong";
-        questionIndex++;
-        showQuestion();
+        if (questionIndex === questionArray.length - 1) {
+            savingInitials()
+        } else {
+            questionIndex++;
+            showQuestion();
+        }
     }
 }
 
 function savingInitials() {
-
+    quizSection.classList.add('hidden');
+    //iScoreSection.classList.remove('hidden');
 }
+
+
 
 function startQuiz() {
     //set current score to zero
     score = 0;
     //set time left 75
-    timeLeft = 75;
+    timeLeft = 20;
     //set question index to zero
     questionIndex = 0;
     //hide welcome section

@@ -77,6 +77,15 @@ body {
   font-style: normal;
 }
 
+.iScore{
+  background-color: #f9fbfd;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 30px 40px;
+  text-align: center;
+  font-style: normal;
+}
+
 .btn {
   border: none;
   background-color: rgb(204, 64, 204);
