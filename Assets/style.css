@@ -88,6 +88,13 @@ body {
 .all{
   text-align: left;
 }
+.sDisplay{
+  color:black;
+  text-align: left;
+  font-style: normal;
+  font-size: 16px;
+  margin: 10px 0;
+}
 .initial-form{
   font-size: 16px;
   height: 20px;
@@ -178,6 +185,7 @@ button[] {
   font-style: normal;
   float:left;
 }
+
 .gb{
   margin: 0;
   display: inline;

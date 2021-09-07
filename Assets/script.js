@@ -1,6 +1,7 @@
 var startBtn = document.querySelector('#start'),
     highBtn = document.querySelector('#high'),
     gbBtn = document.querySelector('#go'),
+    submitoBtn = document.querySelector('#submito'),
     timerEl = document.querySelector('#countdown'),
     welcomeSection = document.querySelector('.welcome'),
     quizSection = document.querySelector('.quiz'),
@@ -12,9 +13,11 @@ var startBtn = document.querySelector('#start'),
     wgOrCorrEl = document.querySelector('#wgOrCorr'),
     highScoreSection = document.querySelector('.highScore'),
     iScoreSection = document.querySelector('.iScore'),
-    scoreDisplayEl = document.querySelector('#highScore'),
+    scoreDisplayEl = document.querySelector('#scoreDisplay'),
     ansBtn = document.querySelectorAll('button.ansBtn'),
+    initEl = document.querySelector('init'),
     item = document.getElementById("userAnswer"),
+    timeIntervalID,
     uAnswer,
     score,
     timeLeft,
@@ -68,7 +71,7 @@ var startBtn = document.querySelector('#start'),
     }];
 
 function countdown() {
-    var timeIntervalID = setInterval(function () {
+    timeIntervalID = setInterval(function () {
         if (timeLeft > 0) {
             timerEl.textContent = "Timer: " + timeLeft;
             timeLeft--;
@@ -100,7 +103,7 @@ function showQuestion() {
         console.log(answer3El.textContent);
         answer4El.textContent = questionArray[questionIndex].ansr[3];
         console.log(answer4El.textContent);
-    }else{
+    } else {
         savingInitials();
     }
     //declare local variable question called question and assign 'q' value of the question object to it
@@ -174,8 +177,28 @@ function showResults(result) {
 function savingInitials() {
     quizSection.classList.add('hidden');
     iScoreSection.classList.remove('hidden');
-    scoreDisplayEl.textContent = "Your final score is " +timeLeft+ ".";
+    scoreDisplayEl.textContent = "Your final score is " + timeLeft + ".";
+    clearInterval(timeIntervalID);
 
+}
+function recordInitial() {
+    var userInitials = initEl.nodeValue,
+        finalScore = timeLeft,
+        userInitialsAndFinalScoreObj= {name: "", score: 0};
+        
+        userInitialsAndFinalScoreObj.name = userInitials;
+        userInitialsAndFinalScoreObj.score = finalScore;
+
+        if(localStorage.getItem("saved-scores")===null){
+            scoresArrayObj.push(userInitialsAndFinalScoreObj);
+            localStorage.setItem("saved-scores", JSON.stringify(scoresArrayObj));
+        }else{
+            scoresArrayObj=JSON.parse(localStorage.getItem("saved-scores"));
+            scoresArrayObj.push(userInitialsAndFinalScoreObj);
+            localStorage.setItem("saved-scores",JSON.stringify(scoresArrayObj));
+            iScoreSection.classList.add('hidden')
+            highScoreSection.classList.remove('hidden');
+        }
 }
 
 
@@ -202,7 +225,6 @@ function startHighScore() {
     welcomeSection.classList.add('hidden');
     //display high score section
     highScoreSection.classList.remove('hidden');
-
 }
 
 function startWelcome() {
@@ -215,3 +237,4 @@ function startWelcome() {
 startBtn.addEventListener('click', startQuiz);
 highBtn.addEventListener('click', startHighScore);
 gbBtn.addEventListener('click', startWelcome);
+submitoBtn.addEventListener('click', recordInitial);
