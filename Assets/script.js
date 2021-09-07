@@ -11,10 +11,11 @@ var startBtn = document.querySelector('#start'),
     answer4El = document.querySelector('#answer4'),
     wgOrCorrEl = document.querySelector('#wgOrCorr'),
     highScoreSection = document.querySelector('.highScore'),
+    iScoreSection = document.querySelector('.iScore'),
+    scoreDisplayEl = document.querySelector('#highScore'),
     ansBtn = document.querySelectorAll('button.ansBtn'),
     item = document.getElementById("userAnswer"),
     uAnswer,
-    answersArray = [],
     score,
     timeLeft,
     questionIndex,
@@ -67,7 +68,6 @@ var startBtn = document.querySelector('#start'),
     }];
 
 function countdown() {
-
     var timeIntervalID = setInterval(function () {
         if (timeLeft > 0) {
             timerEl.textContent = "Timer: " + timeLeft;
@@ -75,19 +75,14 @@ function countdown() {
         } else {
             //timer reaches zero sec Need to calculate scores
             timerEl.textContent = "Timer: " + timeLeft;
-            savingInitials()
             clearInterval(timeIntervalID);
-            
+            savingInitials()
         }
     }, 1000);
 }
 
 function showQuestion() {
     //check if questionIndex is equal to the size of the question array
-    //if they are equal the quiz is over and prompt user to save inital and score(defind new function for saving inital and score)
-    if (questionIndex < questionArray.length) {
-        console.log(questionIndex);
-    } savingInitials();
 
 
 
@@ -105,6 +100,8 @@ function showQuestion() {
         console.log(answer3El.textContent);
         answer4El.textContent = questionArray[questionIndex].ansr[3];
         console.log(answer4El.textContent);
+    }else{
+        savingInitials();
     }
     //declare local variable question called question and assign 'q' value of the question object to it
     // var question;
@@ -176,7 +173,9 @@ function showResults(result) {
 
 function savingInitials() {
     quizSection.classList.add('hidden');
-    //iScoreSection.classList.remove('hidden');
+    iScoreSection.classList.remove('hidden');
+    scoreDisplayEl.textContent = "Your final score is " +timeLeft+ ".";
+
 }
 
 
