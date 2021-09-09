@@ -1,6 +1,7 @@
 var startBtn = document.querySelector('#start'),
     highBtn = document.querySelector('#high'),
     gbBtn = document.querySelector('#go'),
+    clearHSBtn = document.querySelector('#clearHS'),
     submitoBtn = document.querySelector('#submito'),
     timerEl = document.querySelector('#countdown'),
     welcomeSection = document.querySelector('.welcome'),
@@ -15,13 +16,15 @@ var startBtn = document.querySelector('#start'),
     iScoreSection = document.querySelector('.iScore'),
     scoreDisplayEl = document.querySelector('#scoreDisplay'),
     ansBtn = document.querySelectorAll('button.ansBtn'),
-    initEl = document.querySelector('init'),
+    initEl = document.querySelector('#init'),
     item = document.getElementById("userAnswer"),
     timeIntervalID,
     uAnswer,
     score,
     timeLeft,
     questionIndex,
+    scoresArray = [],
+    scoreListEl = document.querySelector('#scoreList'),
 
     questionArray = [{
         q: "Commonly used data types DO not include:",
@@ -85,76 +88,42 @@ function countdown() {
 }
 
 function showQuestion() {
-    //check if questionIndex is equal to the size of the question array
+    var questionObj;
 
-
-
-    //get next question object from question array using question index
     if (questionIndex < questionArray.length) {
-        //shows questions
-        showQEl.textContent = questionArray[questionIndex].q;
-        console.log(showQEl.textContent);
-        //shows answer
-        answer1El.textContent = questionArray[questionIndex].ansr[0];
-        console.log(answer1El.textContent);
-        answer2El.textContent = questionArray[questionIndex].ansr[1];
-        console.log(answer2El.textContent);
-        answer3El.textContent = questionArray[questionIndex].ansr[2];
-        console.log(answer3El.textContent);
-        answer4El.textContent = questionArray[questionIndex].ansr[3];
-        console.log(answer4El.textContent);
+        questionObj = questionArray[questionIndex];
+
+        showQEl.textContent = questionObj.q;
+
+        answer1El.textContent = questionObj.ansr[0];
+        answer1El.dataset.correct = questionObj.ansr[0] === questionObj.ca;
+        answer2El.textContent = questionObj.ansr[1];
+        answer2El.dataset.correct = questionObj.ansr[1] === questionObj.ca;
+        answer3El.textContent = questionObj.ansr[2];
+        answer3El.dataset.correct = questionObj.ansr[2] === questionObj.ca;
+        answer4El.textContent = questionObj.ansr[3];
+        answer4El.dataset.correct = questionObj.ansr[3] === questionObj.ca;
+
     } else {
         savingInitials();
     }
-    //declare local variable question called question and assign 'q' value of the question object to it
-    // var question;
-    // question = questionArray[questionIndex].q;
-    // console.log(question);
-    //using a for loop go through the 'a' array and then assign the element of the array to the list of answer using the 'id'
-    /*for (let i = 0; i < questionArray.length; i++) {
-        answer1El.textContent = questionArray[questionIndex].ansr[0];
-        console.log(answer1El.textContent);
-        answer2El.textContent = questionArray[questionIndex].ansr[1];
-        console.log(answer2El.textContent);
-        answer3El.textContent = questionArray[questionIndex].ansr[2];
-        console.log(answer3El.textContent);
-        answer4El.textContent = questionArray[questionIndex].ansr[3];
-        console.log(answer4El.textContent);
-    }*/
-
-    //TODO:  for each list item assign an click event listner that checks for the correct answer (call checkAnswers)
     answer1El.addEventListener('click', recordingClick);
     answer2El.addEventListener('click', recordingClick);
     answer3El.addEventListener('click', recordingClick);
     answer4El.addEventListener('click', recordingClick);
-
-    //add one to the question index
-    //questionIndex++;
-
 }
 
 
 
 function recordingClick(event) {
     event.target.matches("button");
-    uAnswer = event.target.textContent;
-    checkAnswer(uAnswer);
+    uAnswer = event.target.dataset.correct;
+    showResults(uAnswer);
 
-}
-
-function checkAnswer(uAnswer) {
-    if (uAnswer === questionArray[questionIndex].ca) {
-        result = true;
-        showResults(result);
-    } else {
-        result = false;
-        timeLeft = timeLeft - 10;
-        showResults(result);
-    }
 }
 
 function showResults(result) {
-    if (result === true) {
+    if (result === "true") {
         wgOrCorrEl.textContent = "Correct";
         if (questionIndex === questionArray.length - 1) {
             savingInitials()
@@ -165,6 +134,7 @@ function showResults(result) {
 
     } else {
         wgOrCorrEl.textContent = "Wrong";
+        timeLeft = timeLeft - 10;
         if (questionIndex === questionArray.length - 1) {
             savingInitials()
         } else {
@@ -182,32 +152,48 @@ function savingInitials() {
 
 }
 function recordInitial() {
-    var userInitials = initEl.nodeValue,
+    var userInitials = initEl.value,
         finalScore = timeLeft,
-        userInitialsAndFinalScoreObj= {name: "", score: 0};
-        
-        userInitialsAndFinalScoreObj.name = userInitials;
-        userInitialsAndFinalScoreObj.score = finalScore;
+        userInitialsAndFinalScoreObj = { name: userInitials, score: finalScore };
 
-        if(localStorage.getItem("saved-scores")===null){
-            scoresArrayObj.push(userInitialsAndFinalScoreObj);
-            localStorage.setItem("saved-scores", JSON.stringify(scoresArrayObj));
-        }else{
-            scoresArrayObj=JSON.parse(localStorage.getItem("saved-scores"));
-            scoresArrayObj.push(userInitialsAndFinalScoreObj);
-            localStorage.setItem("saved-scores",JSON.stringify(scoresArrayObj));
-            iScoreSection.classList.add('hidden')
-            highScoreSection.classList.remove('hidden');
-        }
+    if (localStorage.getItem("saved-scores") === null) {
+        scoresArray.push(userInitialsAndFinalScoreObj);
+        localStorage.setItem("saved-scores", JSON.stringify(scoresArray));
+    } else {
+        scoresArray = JSON.parse(localStorage.getItem("saved-scores"));
+        scoresArray.push(userInitialsAndFinalScoreObj);
+        localStorage.setItem("saved-scores", JSON.stringify(scoresArray));
+
+    }
+    renderScores();
+
+    iScoreSection.classList.add('hidden');
+    highScoreSection.classList.remove('hidden');
+
 }
 
+function renderScores() {
+    var liEl;
+    //remove any name and score list
+    scoreListEl.innerHTML = '';
 
+    for (var i = 0; i < scoresArray.length; i++) {
+        liEl = document.createElement('li');
+        liEl.textContent = scoresArray[i].name + " - " + scoresArray[i].score;
+        scoreListEl.appendChild(liEl);
+    }
+}
+function clearscore() {
+    localStorage.clear();
+    scoreListEl.innerHTML = "";
+    startWelcome();
+}
 
 function startQuiz() {
     //set current score to zero
     score = 0;
     //set time left 75
-    timeLeft = 20;
+    timeLeft = 75;
     //set question index to zero
     questionIndex = 0;
     //hide welcome section
@@ -237,4 +223,5 @@ function startWelcome() {
 startBtn.addEventListener('click', startQuiz);
 highBtn.addEventListener('click', startHighScore);
 gbBtn.addEventListener('click', startWelcome);
+clearHSBtn.addEventListener('click', clearscore);
 submitoBtn.addEventListener('click', recordInitial);

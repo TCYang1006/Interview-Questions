@@ -133,6 +133,11 @@ body {
   list-style-type: none;
   text-align: left;
 }
+
+.QDisplay{
+  list-style-type: none;
+  text-align: left;
+}
 .ansBtn{
 background-color: rgb(46, 46, 141);
 border-radius: 5px;

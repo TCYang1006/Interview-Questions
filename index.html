@@ -37,10 +37,10 @@
                 <ul class="answerDisplay">
                     <h2 class="question" id="showQ"></h2>
                     <div id="userAnswer">
-                        <li><button id="answer1" value=0 type="button" class="ansBtn">Option1</button></li>
-                        <li><button id="answer2" value="1" type="button" class="ansBtn">Option2</button></li>
-                        <li><button id="answer3" value="2" type="button" class="ansBtn">Option3</button></li>
-                        <li><button id="answer4" value="3" type="button" class="ansBtn">Option4</button></li>
+                        <li><button id="answer1" data-correct="false" type="button" class="ansBtn">Option1</button></li>
+                        <li><button id="answer2" data-correct="false" type="button" class="ansBtn">Option2</button></li>
+                        <li><button id="answer3" data-correct="false" type="button" class="ansBtn">Option3</button></li>
+                        <li><button id="answer4" data-correct="false" type="button" class="ansBtn">Option4</button></li>
                     </div>
                     <div>
                         <h3 class="wrongOrCorrect" id="wgOrCorr"> Wrong/Correct
@@ -53,13 +53,13 @@
         <section class="highScore hidden">
             <div>
                 <h2 class="champ">High Scores</h2>
-                <ul class="QDisplay" id="Show">
+                <ul class="QDisplay" id="scoreList">
                 </ul>
                 <div class="header">
                     <a class="gb"><button class="ansBtn1" id="go">Go back</button>
                     </a>
                     <b class="gb">
-                        <button class="ansBtn2">Clear high scores</button>
+                        <button class="ansBtn2" id="clearHS">Clear high scores</button>
                     </b>
                 </div>
             </div>
